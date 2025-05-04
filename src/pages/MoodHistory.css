@@ -1,0 +1,79 @@
+.mood-history-container {
+  background-color: #fefefe;
+  font-family: "Montserrat Alternates", sans-serif;
+  text-align: center;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+.mood-history-title {
+  color: #4d7c81;
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.mood-chart-wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.mood-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+}
+
+.mood-summary {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #bbb;
+}
+
+.page-number {
+  font-weight: bold;
+  color: #4d7c81;
+}
+
+.page-arrow {
+  cursor: pointer;
+  color: #ccc;
+}
+
+.page-arrow:hover {
+  color: #4d7c81;
+}
+
+@media (max-width: 600px) {
+  .mood-history-title {
+    font-size: 1.5rem;
+  }
+
+  .mood-legend {
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    gap: 0.75rem;
+  }
+
+  .mood-summary {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .pagination {
+    font-size: 0.95rem;
+    gap: 0.75rem;
+  }
+}

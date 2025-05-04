@@ -1,0 +1,87 @@
+.note-container {
+  background-color: #ffffff;
+  font-family: "Montserrat Alternates", sans-serif;
+  padding: 2rem;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.note-logo {
+  width: 160px;
+  margin: 1rem auto;
+  display: block;
+}
+
+.note-date {
+  font-size: 1rem;
+  color: #4d7c81;
+  margin-top: 0.5rem;
+}
+
+.note-heading {
+  font-size: 1.5rem;
+  color: #4d7c81;
+  margin: 2rem 0 1rem;
+}
+
+.note-textarea {
+  width: 100%;
+  max-width: 360px;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: "Montserrat Alternates", sans-serif;
+  resize: vertical;
+}
+
+.note-last-checkin {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #4d7c81;
+}
+
+.note-mood {
+  font-weight: bold;
+}
+
+.note-save-button {
+  margin-top: 2rem;
+  background-color: #f7af9d;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: filter 0.2s ease-in-out;
+}
+
+.note-save-button:hover {
+  filter: brightness(0.9);
+}
+
+@media (max-width: 600px) {
+  .note-container {
+    padding: 1.25rem;
+  }
+
+  .note-logo {
+    width: 130px;
+    margin-bottom: 1rem;
+  }
+
+  .note-heading {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .note-textarea {
+    max-width: 100%;
+  }
+
+  .note-save-button {
+    width: 100%;
+    max-width: 280px;
+  }
+}

@@ -1,0 +1,120 @@
+.mood-container {
+  background-color: #ffffff;
+  font-family: "Montserrat Alternates", sans-serif;
+  padding: 2rem;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.mood-header {
+  margin-bottom: 2rem;
+}
+
+.mood-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.mood-logo-large {
+  width: 180px;
+  height: auto;
+  margin: 2rem auto 1rem;
+  display: block;
+}
+
+.mood-date,
+.mood-last-checkin,
+.mood-title {
+  color: #4d7c81;
+}
+
+.mood-date {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.mood-last-checkin {
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+  margin-bottom: 2rem;
+}
+
+.mood-question {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  color: #4d7c81;
+}
+
+.mood-button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mood-button {
+  width: 220px;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  color: #fff;
+  cursor: pointer;
+  transition: filter 0.2s ease-in-out;
+}
+
+.mood-button:hover {
+  filter: brightness(0.9);
+}
+
+@media (max-width: 600px) {
+  .mood-container {
+    padding: 1.25rem;
+  }
+  .mood-date {
+    margin-bottom: 0.2rem;
+  }
+  .mood-last-checkin {
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
+  }
+  .mood-logo-large {
+    width: 140px;
+    margin: 1.25rem auto 1rem;
+  }
+
+  .mood-question {
+    font-size: 1.25rem;
+    margin: 0.5rem 0 0.5rem;
+  }
+
+  .mood-button-group {
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .mood-button {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar-logo {
+    width: 24px;
+  }
+
+  .navbar-menu {
+    right: 1rem;
+    top: 3rem;
+  }
+
+  .navbar-menu a {
+    font-size: 0.95rem;
+    padding: 0.4rem 0;
+  }
+}
