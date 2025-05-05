@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+# Noto – Mood Tracking App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Noto is a lightweight, single-page mood tracking app built with React. Users log their moods, save reflective notes, and receive tailored suggestions - all stored locally in `localStorage` for privacy and simplicity.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Mood check-in** with 4 options: Great, Okay, Sad, Angry
+- **Custom suggestions** shown based on the latest mood
+- **Save personal notes** and link them to mood entries
+- **Mood history bar chart** with color-coded insights
+- **A/B testing simulation** for UX research
+- **Mobile-responsive UI** with a soft, pastel theme
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+- **Frontend:** React, CSS Modules
+- **State Handling:** `useState`, `useEffect`, `localStorage`
+- **Routing:** React Router
+- **Charting:** Chart.js
+- **Toasts:** `react-toastify`
+- **A/B Variant Storage:** LocalStorage-based toggles
+- **Build Tool:** CRA (Create React App)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Folder Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+noto-app/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+├── public/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+│ ├── favicon.ico
 
-### `npm run eject`
+│ ├── index.html
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+│ ├── logo192.png
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+│ ├── logo512.png
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+│ ├── manifest.json
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+│ └── robots.txt
 
-## Learn More
+│
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+├── src/
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+│ ├── assets/
 
-### Code Splitting
+│ │ └── noto-icon.png, noto-logo.png
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+│ ├── components/
 
-### Analyzing the Bundle Size
+│ │ ├── Navbar.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+│ │ └── Navbar.css
 
-### Making a Progressive Web App
+│ ├── pages/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+│ │ ├── Splash.js
 
-### Advanced Configuration
+│ │ ├── MoodCheckIn.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+│ │ ├── AddNote.js
 
-### Deployment
+│ │ ├── MoodHistory.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+│ │ ├── Suggestions.js
 
-### `npm run build` fails to minify
+│ │ ├── MoodCheckIn.css
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+│ │ ├── AddNote.css
+
+│ │ ├── MoodHistory.css
+
+│ │ └── Suggestions.css
+
+│ ├── App.js
+
+│ └── index.js
+
+│
+
+├── .gitignore
+
+├── package.json
+
+├── package-lock.json
+
+└── README.md
+
+---
+
+## Setup Instructions
+
+**Clone the repository**
+
+```bash
+git clone https://github.com/your-username/noto-app.git
+cd noto-app
+npm install # install project dependencies
+npm start # run app locally
+npm run build # build for production
+```

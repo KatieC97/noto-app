@@ -1,79 +1,95 @@
 .mood-history-container {
-  background-color: #fefefe;
-  font-family: "Montserrat Alternates", sans-serif;
-  text-align: center;
-  padding: 2rem 1rem;
-  min-height: 100vh;
+padding: 20px;
+font-family: "Montserrat Alternates", sans-serif;
+color: #2b2b2b;
+text-align: center;
 }
 
 .mood-history-title {
-  color: #4d7c81;
-  font-size: 1.75rem;
-  margin-bottom: 2rem;
+font-size: 1.8rem;
+color: #4d7c81;
+margin-top: 20px;
+margin-bottom: 10px;
 }
 
-.mood-chart-wrapper {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 0 1rem;
+.mood-subheading {
+font-size: 1rem;
+margin: 20px 0 10px;
+color: #2b2b2b;
+}
+
+.chart-wrapper {
+max-width: 600px;
+height: 300px;
+margin: 0 auto;
+position: relative;
 }
 
 .mood-legend {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  font-size: 1rem;
+display: flex;
+justify-content: center;
+gap: 20px;
+margin-top: 16px;
+flex-wrap: wrap;
+}
+
+.legend-item {
+display: flex;
+align-items: center;
+font-size: 0.9rem;
+color: #444;
+}
+
+.legend-dot {
+width: 10px;
+height: 10px;
+border-radius: 50%;
+display: inline-block;
+margin-right: 6px;
 }
 
 .mood-summary {
-  margin-top: 2rem;
-  font-size: 1.1rem;
-  color: #333;
+margin-top: 20px;
+font-size: 1rem;
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  font-size: 1rem;
-  color: #bbb;
+display: flex;
+justify-content: center;
+gap: 10px;
+margin-top: 20px;
+font-size: 0.9rem;
 }
 
-.page-number {
-  font-weight: bold;
-  color: #4d7c81;
+.faded {
+opacity: 0.4;
 }
 
-.page-arrow {
-  cursor: pointer;
-  color: #ccc;
+.current {
+font-weight: bold;
 }
 
-.page-arrow:hover {
-  color: #4d7c81;
-}
-
+/* Responsive tweaks */
 @media (max-width: 600px) {
-  .mood-history-title {
-    font-size: 1.5rem;
-  }
+.chart-wrapper {
+height: 250px;
+padding: 0 10px;
+}
 
-  .mood-legend {
-    flex-wrap: wrap;
-    font-size: 0.95rem;
-    gap: 0.75rem;
-  }
+.mood-history-title {
+font-size: 1.6rem;
+}
 
-  .mood-summary {
-    font-size: 1rem;
-    padding: 0 1rem;
-  }
+.mood-subheading {
+font-size: 0.95rem;
+margin-top: 16px;
+}
 
-  .pagination {
-    font-size: 0.95rem;
-    gap: 0.75rem;
-  }
+.legend-item {
+font-size: 0.85rem;
+}
+
+.mood-summary {
+font-size: 0.9rem;
+}
 }

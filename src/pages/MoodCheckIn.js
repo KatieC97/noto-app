@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./MoodCheckIn.css";
@@ -7,42 +7,36 @@ import notoLogo from "../assets/noto-logo.png";
 import { useNavigate } from "react-router-dom";
 
 export default function MoodCheckIn() {
-  const [variant, setVariant] = useState("");
   const navigate = useNavigate();
-
-  const today = new Date().toLocaleDateString("en-GB", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
 
   useEffect(() => {
     const savedVariant = localStorage.getItem("abVariant");
-    if (savedVariant) {
-      setVariant(savedVariant);
-      logAnalyticsEvent("Loaded AB Variant", { variant: savedVariant });
-    } else {
-      const newVariant = Math.random() < 0.5 ? "A" : "B";
-      localStorage.setItem("abVariant", newVariant);
-      setVariant(newVariant);
-      logAnalyticsEvent("Assigned AB Variant", { variant: newVariant });
-    }
+    const variant = savedVariant || (Math.random() < 0.5 ? "A" : "B");
+    localStorage.setItem("abVariant", variant);
+    console.log("[Analytics] AB Variant:", variant);
   }, []);
 
-  function logAnalyticsEvent(eventName, data = {}) {
-    console.log(`[Analytics] ${eventName}`, data);
-  }
-
   function handleMoodClick(mood, color) {
-    logAnalyticsEvent("Mood Selected", { mood, variant });
+    const today = new Date().toLocaleDateString("en-GB", { weekday: "short" });
+
+    const newEntry = {
+      date: today,
+      mood,
+      note: "", // note added later on Add Note page
+    };
+
+    const existingEntries = JSON.parse(
+      localStorage.getItem("moodEntries") || "[]"
+    );
+    existingEntries.push(newEntry);
+    localStorage.setItem("moodEntries", JSON.stringify(existingEntries));
+
+    // ✅ Add this line so Suggestions gets the correct mood
     localStorage.setItem("lastMood", mood);
-    const moodLogs = JSON.parse(localStorage.getItem("moodLogs")) || [];
-    moodLogs.push({ mood, date: new Date().toISOString() });
-    localStorage.setItem("moodLogs", JSON.stringify(moodLogs));
 
     toast(`Mood saved: ${mood}`, {
       position: "bottom-center",
-      autoClose: 1500,
+      autoClose: 1600,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: false,
@@ -56,8 +50,14 @@ export default function MoodCheckIn() {
       },
     });
 
-    setTimeout(() => navigate("/add-note"), 1600);
+    setTimeout(() => navigate("/add-note"), 1700);
   }
+
+  const today = new Date().toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
 
   return (
     <main className="mood-container">
@@ -65,6 +65,7 @@ export default function MoodCheckIn() {
       <img src={notoLogo} alt="Noto logo" className="mood-logo-large" />
       <p className="mood-date">{today}</p>
       <p className="mood-last-checkin">Last check-in: Yesterday</p>
+
       <h2 className="mood-question">How are you feeling?</h2>
 
       <div className="mood-button-group">

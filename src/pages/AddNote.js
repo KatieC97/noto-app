@@ -12,21 +12,34 @@ export default function AddNote() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const mood = localStorage.getItem("lastMood");
-    if (mood) setLastMood(mood);
+    const entries = JSON.parse(localStorage.getItem("moodEntries") || "[]");
+    if (entries.length > 0) {
+      const last = entries[entries.length - 1];
+      if (last?.mood) {
+        setLastMood(last.mood);
+
+        // ✅ Reinforce lastMood for Suggestions screen
+        localStorage.setItem("lastMood", last.mood);
+      }
+    }
   }, []);
 
   const handleSaveNote = () => {
-    const existingData = JSON.parse(localStorage.getItem("moodData") || "[]");
+    const today = new Date().toLocaleDateString("en-GB", { weekday: "short" });
+
     const newEntry = {
-      date: new Date().toLocaleDateString("en-GB"),
+      date: today,
       mood: lastMood,
       note,
     };
+
+    const existing = JSON.parse(localStorage.getItem("moodEntries") || "[]");
     localStorage.setItem(
-      "moodData",
-      JSON.stringify([...existingData, newEntry])
+      "moodEntries",
+      JSON.stringify([...existing, newEntry])
     );
+
+    localStorage.setItem("lastMood", lastMood); // also keeps the latest note's mood
 
     toast("Note saved!", {
       position: "bottom-center",
