@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/noto-app/static/css/main.3a7bfd00.css",
+    "main.js": "/noto-app/static/js/main.35e6ef40.js",
+    "static/media/noto-logo.png": "/noto-app/static/media/noto-logo.c65c90980c6b8c42e1b0.png",
+    "index.html": "/noto-app/index.html",
+    "main.3a7bfd00.css.map": "/noto-app/static/css/main.3a7bfd00.css.map",
+    "main.35e6ef40.js.map": "/noto-app/static/js/main.35e6ef40.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a7bfd00.css",
+    "static/js/main.35e6ef40.js"
+  ]
+}
