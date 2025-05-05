@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/noto-logo.png";
-import "../App.css";
+import "./Splash.css";
 
 function Splash() {
   const navigate = useNavigate();

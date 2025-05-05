@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  font-family: "Montserrat Alternates", sans-serif;
+  background-color: #ffffff;
+}
+
+main {
+  text-align: center;
+  padding: 2rem;
+}
+
+button {
+  font-family: "Montserrat Alternates", sans-serif;
+  border: none;
+  border-radius: 28px;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.navbar-logo {
+  width: 32px;
+  cursor: pointer;
+}
+
+.mood-button {
+  margin: 0.5rem 0;
+  width: 100%;
+  max-width: 320px;
+  color: white;
+}
+
+/* Splash screen styles */
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  min-height: 100vh;
+  padding: 6rem 2rem 3rem;
+  box-sizing: border-box;
+}
+
+.splash-logo {
+  max-width: 220px;
+  width: 40vw;
+  height: auto;
+  margin-bottom: 5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.splash-tagline {
+  font-size: 1.3rem;
+  color: #515254;
+  margin-bottom: 6rem;
+  max-width: 90%;
+}
+
+.splash-button {
+  background-color: #d38b8b;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.splash-button:hover {
+  background-color: #c17777;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .splash-tagline {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+
+  .splash-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
