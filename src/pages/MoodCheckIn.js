@@ -6,6 +6,7 @@ import PageWrapper from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import notoLogo from "../assets/noto-logo.png";
 import { useNavigate } from "react-router-dom";
+import { moods, getMoodColor } from "../utils/helpers";
 
 export default function MoodCheckIn() {
   const navigate = useNavigate();
@@ -70,34 +71,16 @@ export default function MoodCheckIn() {
         <h2 className="mood-question">How are you feeling?</h2>
 
         <div className="mood-button-group">
-          <button
-            className="mood-button"
-            style={{ backgroundColor: "#C08497" }}
-            onClick={() => handleMoodClick("Great", "#C08497")}
-          >
-            Great
-          </button>
-          <button
-            className="mood-button"
-            style={{ backgroundColor: "#FFCAD4" }}
-            onClick={() => handleMoodClick("Okay", "#FFCAD4")}
-          >
-            Okay
-          </button>
-          <button
-            className="mood-button"
-            style={{ backgroundColor: "#B0D0D3" }}
-            onClick={() => handleMoodClick("Sad", "#B0D0D3")}
-          >
-            Sad
-          </button>
-          <button
-            className="mood-button"
-            style={{ backgroundColor: "#F7AF9D" }}
-            onClick={() => handleMoodClick("Angry", "#F7AF9D")}
-          >
-            Angry
-          </button>
+          {moods.map((mood) => (
+            <button
+              key={mood}
+              className="mood-button"
+              style={{ backgroundColor: getMoodColor(mood) }}
+              onClick={() => handleMoodClick(mood, getMoodColor(mood))}
+            >
+              {mood}
+            </button>
+          ))}
         </div>
 
         <ToastContainer />

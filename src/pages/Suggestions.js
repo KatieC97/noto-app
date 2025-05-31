@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 import "./Suggestions.css";
+import { getMoodColor } from "../utils/helpers";
 
 export default function Suggestions() {
   const navigate = useNavigate();
-  const [lastMood, setLastMood] = useState("Okay"); // fallback
-
-  useEffect(() => {
-    const storedMood = localStorage.getItem("lastMood");
-    if (storedMood) {
-      setLastMood(storedMood);
-    }
-  }, []);
+  const mood = localStorage.getItem("lastMood") || "Okay";
+  const bgColor = getMoodColor(mood);
 
   const suggestionsByMood = {
     Great: [
@@ -38,15 +33,7 @@ export default function Suggestions() {
     ],
   };
 
-  const backgroundColors = {
-    Great: "#C08497",
-    Okay: "#FFCAD4",
-    Sad: "#B0D0D3",
-    Angry: "#F7AF9D",
-  };
-
-  const suggestions = suggestionsByMood[lastMood] || suggestionsByMood["Okay"];
-  const bgColor = backgroundColors[lastMood] || "#FFCAD4";
+  const suggestions = suggestionsByMood[mood] || suggestionsByMood["Okay"];
 
   return (
     <PageWrapper>

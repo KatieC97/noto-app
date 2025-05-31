@@ -11,6 +11,7 @@ import {
 import PageWrapper from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import "./MoodHistory.css";
+import { days, moods, getMoodColor } from "../utils/helpers";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -20,15 +21,6 @@ export default function MoodHistory() {
   const [chartOptions, setChartOptions] = useState(null);
 
   useEffect(() => {
-    const colors = {
-      Great: "#C08497",
-      Okay: "#FFCAD4",
-      Sad: "#B0D0D3",
-      Angry: "#F7AF9D",
-    };
-
-    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
     const stored = JSON.parse(localStorage.getItem("moodEntries") || "[]");
     console.log("Stored mood entries:", stored);
     if (stored.length === 0) {
@@ -68,10 +60,10 @@ export default function MoodHistory() {
     setTopMood(mostCommonMood);
 
     try {
-      const datasets = Object.keys(colors).map((mood) => ({
+      const datasets = moods.map((mood) => ({
         label: mood,
         data: days.map((day) => moodCountsByDay?.[day]?.[mood] ?? 0),
-        backgroundColor: colors[mood],
+        backgroundColor: getMoodColor(mood),
       }));
 
       setChartData({
@@ -133,16 +125,11 @@ export default function MoodHistory() {
         </div>
 
         <div className="mood-legend">
-          {Object.entries({
-            Great: "#C08497",
-            Okay: "#FFCAD4",
-            Sad: "#B0D0D3",
-            Angry: "#F7AF9D",
-          }).map(([mood, color]) => (
+          {moods.map((mood) => (
             <span key={mood} className="legend-item">
               <span
                 className="legend-dot"
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: getMoodColor(mood) }}
               ></span>
               {mood}
             </span>
