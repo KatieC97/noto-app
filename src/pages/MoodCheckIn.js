@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./MoodCheckIn.css";
-import PageWrapper from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import notoLogo from "../assets/noto-logo.png";
 import { useNavigate } from "react-router-dom";
@@ -18,21 +17,23 @@ export default function MoodCheckIn() {
     console.log("[Analytics] AB Variant:", variant);
   }, []);
 
-  function handleMoodClick(mood, color) {
-    const today = new Date().toLocaleDateString("en-GB", { weekday: "short" });
+  function handleMoodClick(mood) {
+    const today = new Date().toLocaleDateString("en-GB");
 
     const newEntry = {
       date: today,
       mood,
-      note: "", // note added later on Add Note page
+      note: "",
     };
 
     const existingEntries = JSON.parse(
       localStorage.getItem("moodEntries") || "[]"
     );
-    existingEntries.push(newEntry);
-    localStorage.setItem("moodEntries", JSON.stringify(existingEntries));
 
+    const updated = existingEntries.filter((entry) => entry.date !== today);
+    updated.push(newEntry);
+
+    localStorage.setItem("moodEntries", JSON.stringify(updated));
     localStorage.setItem("lastMood", mood);
 
     toast(`Mood saved: ${mood}`, {
@@ -43,7 +44,7 @@ export default function MoodCheckIn() {
       pauseOnHover: false,
       draggable: false,
       style: {
-        backgroundColor: color,
+        backgroundColor: getMoodColor(mood),
         color: "#fff",
         fontFamily: '"Montserrat Alternates", sans-serif',
         borderRadius: "10px",
@@ -61,30 +62,28 @@ export default function MoodCheckIn() {
   });
 
   return (
-    <PageWrapper>
-      <main className="mood-container">
-        <Navbar />
-        <img src={notoLogo} alt="Noto logo" className="mood-logo-large" />
-        <p className="mood-date">{today}</p>
-        <p className="mood-last-checkin">Last check-in: Yesterday</p>
+    <main className="mood-container">
+      <Navbar />
+      <img src={notoLogo} alt="Noto logo" className="mood-logo-large" />
+      <p className="mood-date">{today}</p>
+      <p className="mood-last-checkin">Last check-in: Yesterday</p>
 
-        <h2 className="mood-question">How are you feeling?</h2>
+      <h2 className="mood-question">How are you feeling today?</h2>
 
-        <div className="mood-button-group">
-          {moods.map((mood) => (
-            <button
-              key={mood}
-              className="mood-button"
-              style={{ backgroundColor: getMoodColor(mood) }}
-              onClick={() => handleMoodClick(mood, getMoodColor(mood))}
-            >
-              {mood}
-            </button>
-          ))}
-        </div>
+      <div className="mood-button-group">
+        {moods.map((mood) => (
+          <button
+            key={mood}
+            className="mood-button"
+            style={{ backgroundColor: getMoodColor(mood) }}
+            onClick={() => handleMoodClick(mood)}
+          >
+            {mood}
+          </button>
+        ))}
+      </div>
 
-        <ToastContainer />
-      </main>
-    </PageWrapper>
+      <ToastContainer />
+    </main>
   );
 }

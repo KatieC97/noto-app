@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
@@ -10,28 +10,18 @@ export default function Suggestions() {
   const mood = localStorage.getItem("lastMood") || "Okay";
   const bgColor = getMoodColor(mood);
 
-  const suggestionsByMood = {
-    Great: [
-      "Write down three things you're grateful for",
-      "Send a kind message to someone you care about",
-      "Capture this feeling in a journal or photo",
-    ],
-    Okay: [
-      "Journal one good thing about today",
-      "Take a mindful walk or stretch",
-      "Practice deep breathing for one minute",
-    ],
-    Sad: [
-      "Write about what you're feeling without judgment",
-      "Hold a comforting object or warm drink",
-      "Try a 5-4-3-2-1 grounding exercise",
-    ],
-    Angry: [
-      "Take 10 slow, steady breaths",
-      "Go outside for a few minutes of fresh air",
-      "Try box breathing: in-4, hold-4, out-4, hold-4",
-    ],
-  };
+  const [suggestionsByMood, setSuggestionsByMood] = useState({});
+
+  useEffect(() => {
+    fetch("http://localhost:4000/suggestions") // match port from server.js
+      .then((res) => res.json())
+      .then((data) => {
+        setSuggestionsByMood(data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch suggestions:", err);
+      });
+  }, []);
 
   const suggestions = suggestionsByMood[mood] || suggestionsByMood["Okay"];
 
@@ -42,15 +32,19 @@ export default function Suggestions() {
         <h2 className="suggestions-title">Suggestions</h2>
 
         <div className="suggestions-list">
-          {suggestions.map((text, idx) => (
-            <div
-              key={idx}
-              className="suggestion-box"
-              style={{ backgroundColor: bgColor }}
-            >
-              {text}
-            </div>
-          ))}
+          {Array.isArray(suggestions) && suggestions.length > 0 ? (
+            suggestions.map((text, idx) => (
+              <div
+                key={idx}
+                className="suggestion-box"
+                style={{ backgroundColor: bgColor }}
+              >
+                {text}
+              </div>
+            ))
+          ) : (
+            <p className="suggestions-loading">Loading suggestions...</p>
+          )}
         </div>
 
         <p className="history-note">

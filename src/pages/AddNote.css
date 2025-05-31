@@ -38,6 +38,23 @@
   display: block;
 }
 
+.note-char-count {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.5rem 0;
+  text-align: center;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.note-char-count.limit-reached {
+  color: #d64545;
+}
+
+.note-limit-msg {
+  font-weight: 500;
+  margin-left: 5px;
+}
+
 .note-last-checkin {
   margin-top: 1rem;
   font-size: 0.95rem;

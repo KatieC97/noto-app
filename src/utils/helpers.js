@@ -10,4 +10,4 @@ export const getMoodColor = (mood) => {
 
 export const moods = ["Great", "Okay", "Sad", "Angry"];
 
-export const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+export const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

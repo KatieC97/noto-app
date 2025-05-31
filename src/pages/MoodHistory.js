@@ -11,7 +11,7 @@ import {
 import PageWrapper from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import "./MoodHistory.css";
-import { days, moods, getMoodColor } from "../utils/helpers";
+import { weekdays as days, moods, getMoodColor } from "../utils/helpers";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -22,11 +22,18 @@ export default function MoodHistory() {
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("moodEntries") || "[]");
-    console.log("Stored mood entries:", stored);
-    if (stored.length === 0) {
-      console.warn("No mood entries found.");
-      return;
-    }
+    if (stored.length === 0) return;
+
+    // Get full date strings (dd/mm/yyyy) for this week
+    const today = new Date();
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - today.getDay() + 1);
+
+    const weekDates = [...Array(7)].map((_, i) => {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      return d.toLocaleDateString("en-GB");
+    });
 
     const moodCountsByDay = {
       Mon: { Great: 0, Okay: 0, Sad: 0, Angry: 0 },
@@ -42,16 +49,22 @@ export default function MoodHistory() {
     const notes = {};
 
     stored.forEach(({ mood, note, date }) => {
-      if (date && moodCountsByDay[date]) {
-        moodCountsByDay[date][mood]++;
+      if (!weekDates.includes(date)) return;
+
+      const weekday = new Date(
+        date.split("/").reverse().join("-")
+      ).toLocaleDateString("en-GB", { weekday: "short" });
+
+      if (moodCountsByDay[weekday]) {
+        moodCountsByDay[weekday][mood]++;
       }
 
       if (mood) {
         moodTally[mood] = (moodTally[mood] || 0) + 1;
       }
 
-      if (date && mood && note) {
-        notes[`${date}-${mood}`] = note;
+      if (note) {
+        notes[`${weekday}-${mood}`] = note;
       }
     });
 

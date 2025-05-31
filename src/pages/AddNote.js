@@ -25,20 +25,17 @@ export default function AddNote() {
   }, []);
 
   const handleSaveNote = () => {
-    const today = new Date().toLocaleDateString("en-GB", { weekday: "short" });
-
-    const newEntry = {
-      date: today,
-      mood: lastMood,
-      note,
-    };
+    const today = new Date().toLocaleDateString("en-GB");
 
     const existing = JSON.parse(localStorage.getItem("moodEntries") || "[]");
-    localStorage.setItem(
-      "moodEntries",
-      JSON.stringify([...existing, newEntry])
-    );
+    const updated = existing.map((entry) => {
+      if (entry.date === today) {
+        return { ...entry, note };
+      }
+      return entry;
+    });
 
+    localStorage.setItem("moodEntries", JSON.stringify(updated));
     localStorage.setItem("lastMood", lastMood); // also keeps the latest note's mood
 
     toast("Note saved!", {
@@ -77,9 +74,19 @@ export default function AddNote() {
           className="note-textarea"
           placeholder="Type your note here..."
           value={note}
-          onChange={(e) => setNote(e.target.value)}
+          onChange={(e) => setNote(e.target.value.slice(0, 300))}
           rows={5}
         />
+        <p
+          className={`note-char-count ${
+            note.length >= 300 ? "limit-reached" : ""
+          }`}
+        >
+          {note.length}/300 characters{" "}
+          {note.length >= 300 && (
+            <span className="note-limit-msg"> - You've reached the limit</span>
+          )}
+        </p>
         <p className="note-last-checkin">
           Last check-in: <span className="note-mood">{lastMood}</span>
         </p>
