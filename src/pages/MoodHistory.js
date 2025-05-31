@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import PageWrapper from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import "./MoodHistory.css";
 
@@ -119,43 +120,45 @@ export default function MoodHistory() {
   }, []);
 
   return (
-    <main className="mood-history-container">
-      <Navbar />
-      <h2 className="mood-history-title">Mood History</h2>
-      <h3 className="mood-subheading">Mood</h3>
+    <PageWrapper>
+      <main className="mood-history-container">
+        <Navbar />
+        <h2 className="mood-history-title">Mood History</h2>
+        <h3 className="mood-subheading">Mood</h3>
 
-      <div className="chart-wrapper">
-        {chartData && chartOptions && (
-          <Bar data={chartData} options={chartOptions} />
-        )}
-      </div>
+        <div className="chart-wrapper">
+          {chartData && chartOptions && (
+            <Bar data={chartData} options={chartOptions} />
+          )}
+        </div>
 
-      <div className="mood-legend">
-        {Object.entries({
-          Great: "#C08497",
-          Okay: "#FFCAD4",
-          Sad: "#B0D0D3",
-          Angry: "#F7AF9D",
-        }).map(([mood, color]) => (
-          <span key={mood} className="legend-item">
-            <span
-              className="legend-dot"
-              style={{ backgroundColor: color }}
-            ></span>
-            {mood}
-          </span>
-        ))}
-      </div>
+        <div className="mood-legend">
+          {Object.entries({
+            Great: "#C08497",
+            Okay: "#FFCAD4",
+            Sad: "#B0D0D3",
+            Angry: "#F7AF9D",
+          }).map(([mood, color]) => (
+            <span key={mood} className="legend-item">
+              <span
+                className="legend-dot"
+                style={{ backgroundColor: color }}
+              ></span>
+              {mood}
+            </span>
+          ))}
+        </div>
 
-      <p className="mood-summary">
-        This week: You felt <strong>{topMood.toLowerCase()}</strong> the most.
-      </p>
+        <p className="mood-summary">
+          This week: You felt <strong>{topMood.toLowerCase()}</strong> the most.
+        </p>
 
-      <div className="pagination">
-        <span className="faded">Previous</span>
-        <span className="current">1</span>
-        <span className="faded">Next</span>
-      </div>
-    </main>
+        <div className="pagination">
+          <span className="faded">Previous</span>
+          <span className="current">1</span>
+          <span className="faded">Next</span>
+        </div>
+      </main>
+    </PageWrapper>
   );
 }

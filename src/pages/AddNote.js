@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PageWrapper from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import notoLogo from "../assets/noto-logo.png";
 import "./AddNote.css";
@@ -18,7 +19,6 @@ export default function AddNote() {
       if (last?.mood) {
         setLastMood(last.mood);
 
-        // ✅ Reinforce lastMood for Suggestions screen
         localStorage.setItem("lastMood", last.mood);
       }
     }
@@ -67,25 +67,27 @@ export default function AddNote() {
   });
 
   return (
-    <main className="note-container">
-      <Navbar />
-      <img src={notoLogo} alt="Noto logo" className="note-logo" />
-      <p className="note-date">{today}</p>
-      <h2 className="note-heading">Add a Note</h2>
-      <textarea
-        className="note-textarea"
-        placeholder="Type your note here..."
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-        rows={5}
-      />
-      <p className="note-last-checkin">
-        Last check-in: <span className="note-mood">{lastMood}</span>
-      </p>
-      <button className="note-save-button" onClick={handleSaveNote}>
-        Save Note
-      </button>
-      <ToastContainer />
-    </main>
+    <PageWrapper>
+      <main className="note-container">
+        <Navbar />
+        <img src={notoLogo} alt="Noto logo" className="note-logo" />
+        <p className="note-date">{today}</p>
+        <h2 className="note-heading">Add a Note</h2>
+        <textarea
+          className="note-textarea"
+          placeholder="Type your note here..."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          rows={5}
+        />
+        <p className="note-last-checkin">
+          Last check-in: <span className="note-mood">{lastMood}</span>
+        </p>
+        <button className="note-save-button" onClick={handleSaveNote}>
+          Save Note
+        </button>
+        <ToastContainer />
+      </main>
+    </PageWrapper>
   );
 }

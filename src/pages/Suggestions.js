@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import PageWrapper from "../components/PageWrapper";
 import "./Suggestions.css";
 
 export default function Suggestions() {
@@ -48,28 +49,30 @@ export default function Suggestions() {
   const bgColor = backgroundColors[lastMood] || "#FFCAD4";
 
   return (
-    <main className="suggestions-container">
-      <Navbar />
-      <h2 className="suggestions-title">Suggestions</h2>
+    <PageWrapper>
+      <main className="suggestions-container">
+        <Navbar />
+        <h2 className="suggestions-title">Suggestions</h2>
 
-      <div className="suggestions-list">
-        {suggestions.map((text, idx) => (
-          <div
-            key={idx}
-            className="suggestion-box"
-            style={{ backgroundColor: bgColor }}
-          >
-            {text}
-          </div>
-        ))}
-      </div>
+        <div className="suggestions-list">
+          {suggestions.map((text, idx) => (
+            <div
+              key={idx}
+              className="suggestion-box"
+              style={{ backgroundColor: bgColor }}
+            >
+              {text}
+            </div>
+          ))}
+        </div>
 
-      <p className="history-note">
-        Want to reflect on past check-ins?{" "}
-        <button className="history-link" onClick={() => navigate("/history")}>
-          View your Mood History
-        </button>
-      </p>
-    </main>
+        <p className="history-note">
+          Want to reflect on past check-ins?{" "}
+          <button className="history-link" onClick={() => navigate("/history")}>
+            View your Mood History
+          </button>
+        </p>
+      </main>
+    </PageWrapper>
   );
 }

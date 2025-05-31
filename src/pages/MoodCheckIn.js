@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./MoodCheckIn.css";
+import PageWrapper from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import notoLogo from "../assets/noto-logo.png";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +32,6 @@ export default function MoodCheckIn() {
     existingEntries.push(newEntry);
     localStorage.setItem("moodEntries", JSON.stringify(existingEntries));
 
-    // ✅ Add this line so Suggestions gets the correct mood
     localStorage.setItem("lastMood", mood);
 
     toast(`Mood saved: ${mood}`, {
@@ -60,46 +60,48 @@ export default function MoodCheckIn() {
   });
 
   return (
-    <main className="mood-container">
-      <Navbar />
-      <img src={notoLogo} alt="Noto logo" className="mood-logo-large" />
-      <p className="mood-date">{today}</p>
-      <p className="mood-last-checkin">Last check-in: Yesterday</p>
+    <PageWrapper>
+      <main className="mood-container">
+        <Navbar />
+        <img src={notoLogo} alt="Noto logo" className="mood-logo-large" />
+        <p className="mood-date">{today}</p>
+        <p className="mood-last-checkin">Last check-in: Yesterday</p>
 
-      <h2 className="mood-question">How are you feeling?</h2>
+        <h2 className="mood-question">How are you feeling?</h2>
 
-      <div className="mood-button-group">
-        <button
-          className="mood-button"
-          style={{ backgroundColor: "#C08497" }}
-          onClick={() => handleMoodClick("Great", "#C08497")}
-        >
-          Great
-        </button>
-        <button
-          className="mood-button"
-          style={{ backgroundColor: "#FFCAD4" }}
-          onClick={() => handleMoodClick("Okay", "#FFCAD4")}
-        >
-          Okay
-        </button>
-        <button
-          className="mood-button"
-          style={{ backgroundColor: "#B0D0D3" }}
-          onClick={() => handleMoodClick("Sad", "#B0D0D3")}
-        >
-          Sad
-        </button>
-        <button
-          className="mood-button"
-          style={{ backgroundColor: "#F7AF9D" }}
-          onClick={() => handleMoodClick("Angry", "#F7AF9D")}
-        >
-          Angry
-        </button>
-      </div>
+        <div className="mood-button-group">
+          <button
+            className="mood-button"
+            style={{ backgroundColor: "#C08497" }}
+            onClick={() => handleMoodClick("Great", "#C08497")}
+          >
+            Great
+          </button>
+          <button
+            className="mood-button"
+            style={{ backgroundColor: "#FFCAD4" }}
+            onClick={() => handleMoodClick("Okay", "#FFCAD4")}
+          >
+            Okay
+          </button>
+          <button
+            className="mood-button"
+            style={{ backgroundColor: "#B0D0D3" }}
+            onClick={() => handleMoodClick("Sad", "#B0D0D3")}
+          >
+            Sad
+          </button>
+          <button
+            className="mood-button"
+            style={{ backgroundColor: "#F7AF9D" }}
+            onClick={() => handleMoodClick("Angry", "#F7AF9D")}
+          >
+            Angry
+          </button>
+        </div>
 
-      <ToastContainer />
-    </main>
+        <ToastContainer />
+      </main>
+    </PageWrapper>
   );
 }
